@@ -27,11 +27,14 @@ jobs:
       - name: Run tests
         run: dotnet test WebApplication3.sln --no-build --verbosity normal
 
-      - name: Build Docker images
+      - name: Build Docker images inside Minikube
         run: |
+          export SHELL=/bin/bash
+          eval $(minikube -p minikube docker-env)
           docker build -t blazorapp1:latest -f BlazorApp1/Dockerfile .
           docker build -t efc:latest -f efc/Dockerfile .
           docker build -t webapplication3:latest -f WebApplication3/Dockerfile .
+
 
   deploy:
     needs: build-test
@@ -43,11 +46,11 @@ jobs:
       - name: Set up Minikube
         uses: medyagh/setup-minikube@latest
 
-      - name: Load Docker images into Minikube
-        run: |
-          minikube image load blazorapp1:latest
-          minikube image load efc:latest
-          minikube image load webapplication3:latest
+      # - name: Load Docker images into Minikube
+      #   run: |
+      #     minikube image load blazorapp1:latest
+      #     minikube image load efc:latest
+      #     minikube image load webapplication3:latest
 
       - name: Apply Kubernetes manifests
         run: |
