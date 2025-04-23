@@ -60,4 +60,4 @@ jobs:
         run: |
           kubectl port-forward service/webapplication3-service 8080:80 &> /dev/null &
           sleep 5
-          curl -i http://localhost:8080/swagger || echo "⚠️ Swagger not available"
+          curl -i http://localhost:8080/posts || echo "⚠️ Swagger not available"
