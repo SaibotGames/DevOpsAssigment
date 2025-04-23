@@ -29,11 +29,14 @@ jobs:
 
       - name: Build Docker images inside Minikube
         run: |
+          set -x  # ← Enables command trace
           export SHELL=/bin/bash
           eval $(minikube -p minikube docker-env)
+          docker version
           docker build -t blazorapp1:latest -f BlazorApp1/Dockerfile .
           docker build -t efc:latest -f efc/Dockerfile .
           docker build -t webapplication3:latest -f WebApplication3/Dockerfile .
+
 
 
   deploy:
