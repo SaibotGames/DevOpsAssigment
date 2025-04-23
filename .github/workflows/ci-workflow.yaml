@@ -29,9 +29,13 @@ jobs:
 
       - name: Build Docker images inside Minikube
         run: |
-          set -x  # ← Enables command trace
           export SHELL=/bin/bash
-          eval $(minikube -p minikube docker-env)
+          if ! minikube status | grep -q "Running"; then
+            echo "Minikube is not running"; exit 1;
+          fi
+
+          eval $(minikube docker-env) || { echo "Failed to switch to Minikube Docker env"; exit 1; }
+
           docker version
           docker build -t blazorapp1:latest -f BlazorApp1/Dockerfile .
           docker build -t efc:latest -f efc/Dockerfile .
