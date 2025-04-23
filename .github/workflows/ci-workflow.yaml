@@ -26,6 +26,10 @@ jobs:
 
       - name: Run tests
         run: dotnet test WebApplication3.sln --no-build --verbosity normal
+      - name: Start and verify Minikube
+        run: |
+          minikube start --driver=docker --wait=all
+          minikube status
 
       - name: Build Docker images inside Minikube
         run: |
