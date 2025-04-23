@@ -1,0 +1,50 @@
+﻿@page "/Posts"
+@using BlazorApp1.Services
+@using dto
+@inject IPostService service;
+@inject NavigationManager navMgr;
+
+<PageTitle>Posts</PageTitle>
+
+<h3>Posts</h3>
+
+<ul class="posts">
+    @foreach (var post in posts)
+    {
+        <li @onclick="@(() => NavigateTo(post))">
+            <span class="badge">@post.Id</span>@post.PostTitle
+        </li>
+    }
+</ul>
+
+@code {
+    PostDto selected;
+    private PostDto[] posts = Array.Empty<PostDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var fetchedPosts = await service.GetMany();
+        posts = fetchedPosts?.ToArray() ?? Array.Empty<PostDto>();
+    }
+
+    private void NavigateTo(PostDto post)
+    {
+        navMgr.NavigateTo("/PostDetails/" + post.Id);
+    }
+}
+<style>
+    .badge {
+        display: inline-block;
+        font-size: small;
+        color: white;
+        padding: 0.8em 0.7em 0 0.7em;
+        background-color:#405061;
+        line-height: 1em;
+        position: relative;
+        left: -1px;
+        top: -4px;
+        height: 1.8em;
+        margin-right: .8em;
+        border-radius: 4px 0 0 4px;
+    }
+</style>

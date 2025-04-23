@@ -1,0 +1,50 @@
+﻿@page "/PostDetails/{postID}"
+@using BlazorApp1.Services
+@using dto
+@inject NavigationManager NavMgr;
+@inject IPostService postService;
+<PageTitle>Post Details</PageTitle>
+<h3>PostDetails</h3>
+
+@if (selectedPost == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <h2>@selectedPost.PostTitle</h2>
+    <div>@selectedPost.PostContent</div>
+    <br/>
+    <button @onclick="EditPostClicked">Edit post</button>
+}
+
+@code {
+    [Parameter] public string postId { get; set; }
+    private PostDto selectedPost { get; set; }
+    private string errorLabel;
+
+    private void EditPostClicked()
+    {
+        NavMgr.NavigateTo($"/EditPost/{postId}");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if (int.TryParse(postId, out int parsedPostId))
+            {
+                selectedPost = await postService.GetPostAsync(parsedPostId);
+                if (selectedPost == null){}
+                {
+                    Console.WriteLine("Invalid Post ID.");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error loading post: {e.Message}");
+        }
+    }
+
+}

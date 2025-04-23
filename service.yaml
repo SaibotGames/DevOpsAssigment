@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: blazorapp-service
+spec:
+  selector:
+    app: blazorapp
+  ports:
+    - protocol: TCP
+      port: 80  # External port
+      targetPort: 8080  # Match container port
+  type: NodePort  # Exposes the service on a node IP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: efc-service
+spec:
+  selector:
+    app: efc
+  ports:
+    - protocol: TCP
+      port: 3306  # Example: MySQL/MariaDB
+      targetPort: 3306
+  type: ClusterIP  # Internal service only
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapplication3-service
+spec:
+  selector:
+    app: webapplication3
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80  # External port
+      targetPort: 8080  # Container port
+    - name: grpc
+      protocol: TCP
+      port: 5069
+      targetPort: 8081  # Second container port
+  type: NodePort  # Exposes API externally

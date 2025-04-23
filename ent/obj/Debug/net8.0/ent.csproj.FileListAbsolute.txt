@@ -1,0 +1,14 @@
+C:\Users\user\RiderProjects\WebApplication3\ent\bin\Debug\net8.0\ent.exe
+C:\Users\user\RiderProjects\WebApplication3\ent\bin\Debug\net8.0\ent.deps.json
+C:\Users\user\RiderProjects\WebApplication3\ent\bin\Debug\net8.0\ent.runtimeconfig.json
+C:\Users\user\RiderProjects\WebApplication3\ent\bin\Debug\net8.0\ent.dll
+C:\Users\user\RiderProjects\WebApplication3\ent\bin\Debug\net8.0\ent.pdb
+C:\Users\user\RiderProjects\WebApplication3\ent\obj\Debug\net8.0\ent.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\RiderProjects\WebApplication3\ent\obj\Debug\net8.0\ent.AssemblyInfoInputs.cache
+C:\Users\user\RiderProjects\WebApplication3\ent\obj\Debug\net8.0\ent.AssemblyInfo.cs
+C:\Users\user\RiderProjects\WebApplication3\ent\obj\Debug\net8.0\ent.csproj.CoreCompileInputs.cache
+C:\Users\user\RiderProjects\WebApplication3\ent\obj\Debug\net8.0\ent.dll
+C:\Users\user\RiderProjects\WebApplication3\ent\obj\Debug\net8.0\refint\ent.dll
+C:\Users\user\RiderProjects\WebApplication3\ent\obj\Debug\net8.0\ent.pdb
+C:\Users\user\RiderProjects\WebApplication3\ent\obj\Debug\net8.0\ent.genruntimeconfig.cache
+C:\Users\user\RiderProjects\WebApplication3\ent\obj\Debug\net8.0\ref\ent.dll

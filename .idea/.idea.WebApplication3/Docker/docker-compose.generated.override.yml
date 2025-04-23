@@ -1,0 +1,60 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  blazorapp1:
+    build:
+      context: "C:\\Users\\user\\RiderProjects\\WebApplication3"
+      dockerfile: "BlazorApp1/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/BlazorApp1.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net8.0/BlazorApp1.staticwebassets.runtime.CT.json"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "blazorapp1:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\user\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\user\\RiderProjects\\WebApplication3\\BlazorApp1:/app:rw"
+    - "C:\\Users\\user\\RiderProjects\\WebApplication3:/src:rw"
+    working_dir: "/app"
+  efc:
+    build:
+      context: "C:\\Users\\user\\RiderProjects\\WebApplication3"
+      dockerfile: "efc/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/efc.dll"
+    environment:
+      DOTNET_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "efc:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\user\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\user\\RiderProjects\\WebApplication3\\efc:/app:rw"
+    - "C:\\Users\\user\\RiderProjects\\WebApplication3:/src:rw"
+    working_dir: "/app"
+  webapplication3:
+    build:
+      context: "C:\\Users\\user\\RiderProjects\\WebApplication3"
+      dockerfile: "WebApplication3/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/WebApplication3.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "webapplication3:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\user\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\user\\RiderProjects\\WebApplication3\\WebApplication3:/app:rw"
+    - "C:\\Users\\user\\RiderProjects\\WebApplication3:/src:rw"
+    working_dir: "/app"

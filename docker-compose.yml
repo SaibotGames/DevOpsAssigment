@@ -1,0 +1,43 @@
+﻿version: '3.8'
+
+services:
+  blazorapp1:
+    image: blazorapp1
+    build:
+      context: .
+      dockerfile: BlazorApp1/Dockerfile
+    environment:
+      - DOTNET_RUNNING_IN_CONTAINER=true
+    volumes:
+      - /keys:/app/keys  # Changed to absolute path for Kompose compatibility
+    ports:
+      - "8090:8080"
+    networks:
+      - app-network
+
+  efc:
+    image: efc
+    build:
+      context: .
+      dockerfile: efc/Dockerfile
+    volumes:
+      - /data:/app/data  # Changed to absolute path for Kompose compatibility
+    environment:
+      - DATABASE_PATH=/app/data/database.sqlite
+    networks:
+      - app-network
+
+  webapplication3:
+    image: webapplication3
+    build:
+      context: .
+      dockerfile: WebApplication3/Dockerfile
+    ports:
+      - "8080:8080"
+      - "5069:8081"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
