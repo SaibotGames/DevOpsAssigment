@@ -7,77 +7,57 @@ on:
     branches: [main, master]
 
 jobs:
-  build-test:
+  build-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: 🧾 Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup .NET SDK
+      - name: 🧰 Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore NuGet packages
-        run: dotnet restore WebApplication3.sln
+      - name: 🧱 Restore & Build
+        run: |
+          dotnet restore WebApplication3.sln
+          dotnet build WebApplication3.sln --configuration Release --no-restore
 
-      - name: Build the solution
-        run: dotnet build WebApplication3.sln --configuration Release --no-restore
-
-      - name: Run tests
+      - name: 🧪 Run tests
         run: dotnet test WebApplication3.sln --no-build --verbosity normal
-      - name: Start and verify Minikube
+
+      - name: 🚀 Start Minikube
+        uses: medyagh/setup-minikube@latest
+
+      - name: ✅ Verify Minikube is running
         run: |
           minikube start --driver=docker --wait=all
           minikube status
 
-      - name: Build Docker images inside Minikube
+      - name: 🐳 Build Docker images inside Minikube
         run: |
           export SHELL=/bin/bash
-          if ! minikube status | grep -q "Running"; then
-            echo "Minikube is not running"; exit 1;
-          fi
+          eval $(minikube -p minikube docker-env) || { echo "❌ Failed to use Minikube Docker"; exit 1; }
 
-          eval $(minikube docker-env) || { echo "Failed to switch to Minikube Docker env"; exit 1; }
-
-          docker version
           docker build -t blazorapp1:latest -f BlazorApp1/Dockerfile .
           docker build -t efc:latest -f efc/Dockerfile .
           docker build -t webapplication3:latest -f WebApplication3/Dockerfile .
 
-
-
-  deploy:
-    needs: build-test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Minikube
-        uses: medyagh/setup-minikube@latest
-
-      # - name: Load Docker images into Minikube
-      #   run: |
-      #     minikube image load blazorapp1:latest
-      #     minikube image load efc:latest
-      #     minikube image load webapplication3:latest
-
-      - name: Apply Kubernetes manifests
+      - name: 📦 Apply Kubernetes manifests
         run: |
           kubectl apply -f deployment.yaml
           kubectl apply -f service.yaml
           kubectl apply -f pvc-dataprotection.yaml
 
-      - name: Wait for rollouts
+      - name: 🕒 Wait for rollout (best-effort)
         run: |
           kubectl rollout status deployment/blazorapp-deployment --timeout=60s || true
           kubectl rollout status deployment/efc-deployment --timeout=60s || true
           kubectl rollout status deployment/webapplication3-deployment --timeout=60s || true
-      - name: Test webapplication3 service
+
+      - name: 🌐 Test service endpoint
         run: |
           kubectl port-forward service/webapplication3-service 8080:80 &> /dev/null &
           sleep 5
-          curl -i http://localhost:8080/swagger || echo "Swagger not available"
-
-
+          curl -i http://localhost:8080/swagger || echo "⚠️ Swagger not available"
