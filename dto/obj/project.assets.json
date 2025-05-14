@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\user\\RiderProjects\\WebApplication3\\dto\\dto.csproj",
+      "projectUniqueName": "C:\\Users\\user\\devops\\DevOpsAssigment\\dto\\dto.csproj",
       "projectName": "dto",
-      "projectPath": "c:\\Users\\user\\RiderProjects\\WebApplication3\\dto\\dto.csproj",
+      "projectPath": "C:\\Users\\user\\devops\\DevOpsAssigment\\dto\\dto.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\user\\RiderProjects\\WebApplication3\\dto\\obj\\",
+      "outputPath": "C:\\Users\\user\\devops\\DevOpsAssigment\\dto\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -43,8 +43,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.200"
+      }
     },
     "frameworks": {
       "net8.0": {

@@ -3663,11 +3663,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\RiderProjects\\WebApplication3\\efc\\efc.csproj",
+      "projectUniqueName": "C:\\Users\\user\\devops\\DevOpsAssigment\\efc\\efc.csproj",
       "projectName": "efc",
-      "projectPath": "C:\\Users\\user\\RiderProjects\\WebApplication3\\efc\\efc.csproj",
+      "projectPath": "C:\\Users\\user\\devops\\DevOpsAssigment\\efc\\efc.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\RiderProjects\\WebApplication3\\efc\\obj\\",
+      "outputPath": "C:\\Users\\user\\devops\\DevOpsAssigment\\efc\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -3682,11 +3682,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\user\\RiderProjects\\WebApplication3\\ent\\ent.csproj": {
-              "projectPath": "C:\\Users\\user\\RiderProjects\\WebApplication3\\ent\\ent.csproj"
+            "C:\\Users\\user\\devops\\DevOpsAssigment\\ent\\ent.csproj": {
+              "projectPath": "C:\\Users\\user\\devops\\DevOpsAssigment\\ent\\ent.csproj"
             },
-            "C:\\Users\\user\\RiderProjects\\WebApplication3\\inter\\inter.csproj": {
-              "projectPath": "C:\\Users\\user\\RiderProjects\\WebApplication3\\inter\\inter.csproj"
+            "C:\\Users\\user\\devops\\DevOpsAssigment\\inter\\inter.csproj": {
+              "projectPath": "C:\\Users\\user\\devops\\DevOpsAssigment\\inter\\inter.csproj"
             }
           }
         }
@@ -3700,8 +3700,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.200"
+      }
     },
     "frameworks": {
       "net8.0": {

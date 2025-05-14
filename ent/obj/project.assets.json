@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\user\\RiderProjects\\WebApplication3\\ent\\ent.csproj",
+      "projectUniqueName": "C:\\Users\\user\\devops\\DevOpsAssigment\\ent\\ent.csproj",
       "projectName": "ent",
-      "projectPath": "c:\\Users\\user\\RiderProjects\\WebApplication3\\ent\\ent.csproj",
+      "projectPath": "C:\\Users\\user\\devops\\DevOpsAssigment\\ent\\ent.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\user\\RiderProjects\\WebApplication3\\ent\\obj\\",
+      "outputPath": "C:\\Users\\user\\devops\\DevOpsAssigment\\ent\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -43,8 +43,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.200"
+      }
     },
     "frameworks": {
       "net8.0": {

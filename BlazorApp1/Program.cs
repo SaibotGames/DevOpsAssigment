@@ -17,7 +17,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddHttpClient<IPostService, HttpPostService>(client =>
 {
-    client.BaseAddress = new Uri("http://webapplication3-service");
+    client.BaseAddress = new Uri("http://webapplication3:5242/");
 });
 
 

@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowBlazor", policy =>
-        policy.WithOrigins("http://localhost:5000") // Update with your Blazor frontend URL
+        policy.WithOrigins("*") // Update with your Blazor frontend URL
             .AllowAnyMethod()
             .AllowAnyHeader());
 });

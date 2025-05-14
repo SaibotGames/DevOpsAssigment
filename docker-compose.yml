@@ -9,23 +9,23 @@ services:
     environment:
       - DOTNET_RUNNING_IN_CONTAINER=true
     volumes:
-      - /keys:/app/keys  # Changed to absolute path for Kompose compatibility
+        - keys-data:/app/keys  # Changed to absolute path for Kompose compatibility
     ports:
-      - "8090:8080"
+      - "8080:8080"
     networks:
       - app-network
 
-  efc:
-    image: efc
-    build:
-      context: .
-      dockerfile: efc/Dockerfile
-    volumes:
-      - /data:/app/data  # Changed to absolute path for Kompose compatibility
-    environment:
-      - DATABASE_PATH=/app/data/database.sqlite
-    networks:
-      - app-network
+  # efc:
+  #   image: efc
+  #   build:
+  #     context: .
+  #     dockerfile: efc/Dockerfile
+  #   volumes:
+  #     - /data:/app/data  # Changed to absolute path for Kompose compatibility
+  #   environment:
+  #     - DATABASE_PATH=/app/data/database.sqlite
+  #   networks:
+  #     - app-network
 
   webapplication3:
     image: webapplication3
@@ -33,11 +33,13 @@ services:
       context: .
       dockerfile: WebApplication3/Dockerfile
     ports:
-      - "8080:8080"
-      - "5069:8081"
+      - "5242:5242"
     networks:
       - app-network
 
+volumes:
+  keys-data:
+  
 networks:
   app-network:
     driver: bridge
