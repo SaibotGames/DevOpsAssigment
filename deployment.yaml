@@ -27,36 +27,7 @@ spec:
             claimName: blazorapp-dataprotection-pvc
 
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: efc-deployment
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: efc
-  template:
-    metadata:
-      labels:
-        app: efc
-    spec:
-      containers:
-        - name: efc
-          image: efc:latest  # Replace with your built image
-          imagePullPolicy: Never
-          ports:
-            - containerPort: 3306  # Adjust for database if needed
-          env:
-            - name: DATABASE_PATH
-              value: "/app/data/database.sqlite"
-          volumeMounts:
-            - name: data-volume
-              mountPath: /app/data
-      volumes:
-        - name: data-volume
-          emptyDir: {}  # Can be replaced with a Persistent Volume Claim (PVC)
----
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -73,10 +44,9 @@ spec:
     spec:
       containers:
         - name: webapplication3
-          image: webapplication3:latest  # Replace with the correct image name
+          image: webapplication3:latest 
           imagePullPolicy: Never
           ports:
-            - containerPort: 8080
             - containerPort: 8081
           env:
             - name: DOTNET_RUNNING_IN_CONTAINER
