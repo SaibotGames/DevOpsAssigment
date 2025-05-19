@@ -41,14 +41,15 @@ jobs:
           eval $(minikube -p minikube docker-env) || { echo "Failed to use Minikube Docker"; exit 1; }
 
           docker build -t blazorapp1:latest -f BlazorApp1/Dockerfile .
-          docker build -t efc:latest -f efc/Dockerfile .
           docker build -t webapplication3:latest -f WebApplication3/Dockerfile .
 
-      - name: Apply Kubernetes manifests
+      - name: Apply Kubernetes manifests and upload images with minikube
         run: |
           kubectl apply -f deployment.yaml
           kubectl apply -f service.yaml
           kubectl apply -f pvc-dataprotection.yaml
+          minikube image load webapplication3:latest
+          minikube image load blazorapp1:latest
 
       - name: Wait for rollout (best-effort)
         run: |
@@ -61,3 +62,10 @@ jobs:
           kubectl port-forward service/webapplication3-service 8080:80 &> /dev/null &
           sleep 5
           curl -i http://localhost:8080/Posts || echo "Swagger not available"
+      - name: build and push the image
+        uses: mr-smithers-excellent/docker-build-push@4
+        with:
+          image: saibotgames/devops
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME}}
+          password: ${{ secrets.DOCKER_PASSWORD}}
