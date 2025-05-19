@@ -8,56 +8,59 @@ on:
 
 jobs:
   build-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
-      - name: 🧾 Checkout code
+      - name: Checkout the code
         uses: actions/checkout@v3
 
-      - name: 🧰 Setup .NET SDK
+      - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      - name: 🧱 Restore & Build
+      - name: Restore & Build
         run: |
           dotnet restore WebApplication3.sln
           dotnet build WebApplication3.sln --configuration Release --no-restore
 
-      - name: 🧪 Run tests
+      - name: Run tests
         run: dotnet test WebApplication3.sln --no-build --verbosity normal
 
-      - name: 🚀 Start Minikube
+      - name: Start Minikube
         uses: medyagh/setup-minikube@latest
 
-      - name: ✅ Verify Minikube is running
+      - name: Verify Minikube is running
         run: |
           minikube start --driver=docker --wait=all
           minikube status
 
-      - name: 🐳 Build Docker images inside Minikube
+      - name: Build Docker images inside Minikube
         run: |
           export SHELL=/bin/bash
-          eval $(minikube -p minikube docker-env) || { echo "❌ Failed to use Minikube Docker"; exit 1; }
+          eval $(minikube -p minikube docker-env) || { echo "Failed to use Minikube Docker"; exit 1; }
 
           docker build -t blazorapp1:latest -f BlazorApp1/Dockerfile .
           docker build -t efc:latest -f efc/Dockerfile .
           docker build -t webapplication3:latest -f WebApplication3/Dockerfile .
 
-      - name: 📦 Apply Kubernetes manifests
+      - name: Apply Kubernetes manifests
         run: |
           kubectl apply -f deployment.yaml
           kubectl apply -f service.yaml
           kubectl apply -f pvc-dataprotection.yaml
 
-      - name: 🕒 Wait for rollout (best-effort)
+      - name: Wait for rollout (best-effort)
         run: |
           kubectl rollout status deployment/blazorapp-deployment --timeout=60s || true
           kubectl rollout status deployment/efc-deployment --timeout=60s || true
           kubectl rollout status deployment/webapplication3-deployment --timeout=60s || true
 
-      - name: 🌐 Test service endpoint
+      - name: Test service endpoint
         run: |
           kubectl port-forward service/webapplication3-service 8080:80 &> /dev/null &
           sleep 5
-          curl -i http://localhost:8080/Posts || echo "⚠️ Swagger not available"
+          curl -i http://localhost:8080/Posts || echo "Swagger not available"
