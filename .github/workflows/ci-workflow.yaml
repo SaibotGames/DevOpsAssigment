@@ -68,5 +68,6 @@ jobs:
         with:
           image: saibotgames/devops
           registry: docker.io
+          dockerfile: WebApplication3/Dockerfile
           username: ${{ secrets.DOCKER_USERNAME}}
           password: ${{ secrets.DOCKER_PASSWORD}}
