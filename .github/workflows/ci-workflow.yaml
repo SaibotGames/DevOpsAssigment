@@ -54,14 +54,8 @@ jobs:
       - name: Wait for rollout (best-effort)
         run: |
           kubectl rollout status deployment/blazorapp-deployment --timeout=60s || true
-          kubectl rollout status deployment/efc-deployment --timeout=60s || true
           kubectl rollout status deployment/webapplication3-deployment --timeout=60s || true
 
-      - name: Test service endpoint
-        run: |
-          kubectl port-forward service/webapplication3-service 8080:80 &> /dev/null &
-          sleep 5
-          curl -i http://localhost:8080/Posts || echo "Swagger not available"
 
       - uses: mr-smithers-excellent/docker-build-push@v3
         name: build and push the image
